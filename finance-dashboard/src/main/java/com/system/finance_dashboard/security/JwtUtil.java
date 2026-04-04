@@ -1,4 +1,4 @@
-package com.system.finance_dashboard.config;
+package com.system.finance_dashboard.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -18,13 +18,12 @@ public class JwtUtil {
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
-    @Value("${jwt.access-expiration}")
+    @Value("${jwt.token-expiration}")
     private String JWT_ACCESS_EXPIRATION;
 
-    @Value("${jwt.refresh-expiration}")
-    private String JWT_REFRESH_EXPIRATION;
 
     public String generateAccessToken(String username, String role) {
+
         return Jwts.builder()
                 .subject(username)
                 .claim("role", role)
@@ -34,15 +33,6 @@ public class JwtUtil {
                 .compact();
     }
 
-    public String generateRefreshToken(String username, String role) {
-        return Jwts.builder()
-                .subject(username)
-                .claim("role", role)
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + Long.parseLong(JWT_REFRESH_EXPIRATION)))
-                .signWith(getSignKey())
-                .compact();
-    }
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

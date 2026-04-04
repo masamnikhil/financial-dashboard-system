@@ -23,9 +23,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
           "status": 401,
           "error": "Unauthorized",
           "message": "Authentication failed",
-          "path": "%s"
         }
-        """.formatted(request.getRequestURI()));
+        """);
     }
 }
 

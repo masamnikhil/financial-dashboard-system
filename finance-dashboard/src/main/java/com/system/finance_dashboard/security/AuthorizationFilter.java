@@ -1,4 +1,4 @@
-package com.system.finance_dashboard.config;
+package com.system.finance_dashboard.security;
 
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;

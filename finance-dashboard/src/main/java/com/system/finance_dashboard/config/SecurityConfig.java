@@ -1,5 +1,6 @@
 package com.system.finance_dashboard.config;
 
+import com.system.finance_dashboard.security.AuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,8 +28,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http){
         http
                 .csrf(crsf -> crsf.disable())
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/users/register", "/api/users/login").permitAll()
-                        //.requestMatchers("/api/users/hello").hasRole("ADMIN")
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/users/login").permitAll()
+                        .requestMatchers("/api/users/register").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(ex -> ex

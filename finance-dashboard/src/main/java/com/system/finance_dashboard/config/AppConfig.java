@@ -1,5 +1,6 @@
 package com.system.finance_dashboard.config;
 
+import com.system.finance_dashboard.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

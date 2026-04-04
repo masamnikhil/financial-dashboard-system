@@ -28,9 +28,6 @@ public class FinanceDashboardApplication implements CommandLineRunner {
                             .role(Role.ADMIN).build();
             userRepository.save(admin);
 
-            User analyst = User.builder().name("Analyst").username("analyst").email("analyst@gmail.com").password(passwordEncoder.encode("Analyst@123"))
-                    .role(Role.ANALYST).build();
-            userRepository.save(analyst);
         }
     }
 }

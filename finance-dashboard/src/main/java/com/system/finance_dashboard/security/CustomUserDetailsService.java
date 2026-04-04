@@ -1,7 +1,6 @@
-package com.system.finance_dashboard.config;
+package com.system.finance_dashboard.security;
 
 import com.system.finance_dashboard.entity.User;
-import com.system.finance_dashboard.exception.UserAuthenticationException;
 import com.system.finance_dashboard.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

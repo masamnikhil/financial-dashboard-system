@@ -6,8 +6,6 @@ import java.util.Map;
 public record ErrorResponse(
         String message,
         int status,
-        String path,
-        LocalDateTime timestamp,
-        Map<String, String> errors
+        LocalDateTime timestamp
 ) {
 }

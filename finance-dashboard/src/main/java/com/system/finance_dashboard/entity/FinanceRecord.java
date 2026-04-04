@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Builder
 @Data
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "financial_records")
-public class FinancialRecord {
+public class FinanceRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +29,10 @@ public class FinancialRecord {
     @Column(nullable = false)
     private String category;
     @Column(nullable = false, updatable = false)
-    private LocalDateTime date;
+    private LocalDateTime createdAt;
+    private String notes;
+    private LocalDateTime deletedAt;
     @Column(nullable = false)
-    private String description;
-    @Column(updatable = false)
-    private Long createdBy;
+    private String createdBy;
+
 }
