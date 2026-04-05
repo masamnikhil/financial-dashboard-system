@@ -5,6 +5,7 @@ import com.system.finance_dashboard.dto.FinanceRecordRequest;
 import com.system.finance_dashboard.dto.UpdateRecordRequest;
 import com.system.finance_dashboard.entity.RecordType;
 import com.system.finance_dashboard.service.FinancialRecordService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/api/records")
 @PreAuthorize("hasRole('ADMIN')")
@@ -55,7 +57,7 @@ public class FinancialRecordController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ANALYST', 'ADMIN')")
     public ResponseEntity<FinanceRecordDto> getRecordById(@PathVariable
-                                                              @NotNull(message = "userId is required")
+                                                              @NotNull(message = "id is required")
                                                               @Positive(message = "id should be positive")
                                                               Long id) {
         return ResponseEntity.ok(financialRecordService.getRecordById(id));
@@ -78,7 +80,7 @@ public class FinancialRecordController {
     @PatchMapping("/{id}")
     public ResponseEntity<FinanceRecordDto> updateRecord(
             @PathVariable
-            @NotNull(message = "userId is required")
+            @NotNull(message = "id is required")
             @Positive(message = "id should be positive")
             Long id,
             @Valid @RequestBody UpdateRecordRequest request) {

@@ -28,7 +28,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http){
         http
                 .csrf(crsf -> crsf.disable())
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/users/login").permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/users/login", "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html").permitAll()
                         .requestMatchers("/api/users/register").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

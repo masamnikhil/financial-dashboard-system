@@ -2,8 +2,10 @@ package com.system.finance_dashboard.controller;
 
 import com.system.finance_dashboard.dto.*;
 import com.system.finance_dashboard.service.UserService;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
@@ -30,6 +33,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(tokens);
     }
 
+    @SecurityRequirement(name = "")
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> userLogin(@Valid @RequestBody LoginRequest request){
         Map<String, String> tokens = userService.authenticate(request);
@@ -48,7 +52,7 @@ public class UserController {
     @PatchMapping("/{id}/role")
     public ResponseEntity<String> updateRoleOfUser(@PathVariable("id")
                                                        @NotNull(message = "userId is required")
-                                                       @Positive(message = "id should be positive")
+                                                       @Positive(message = "userId should be positive")
                                                        Long userId,
                                                        @Valid @RequestBody RoleUpdateRequest request){
            if(userService.updateRole(userId, request.role()))
@@ -57,11 +61,12 @@ public class UserController {
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("something went wrong");
     }
 
+
     @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/{id}/status")
     public ResponseEntity<String> updateStatusOfUser(@PathVariable("id")
                                                          @NotNull(message = "userId is required")
-                                                         @Positive(message = "id should be positive")
+                                                         @Positive(message = "userId should be positive")
                                                          Long userId,
                                                      @Valid @RequestBody StatusUpdateRequest request){
         if(userService.updateStatus(userId, request.status()))
@@ -74,7 +79,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id")
                                                    @NotNull(message = "userId is required")
-                                                   @Positive(message = "id should be positive")
+                                                   @Positive(message = "userId should be positive")
                                                    Long userId
                                                      ){
             return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(userId));

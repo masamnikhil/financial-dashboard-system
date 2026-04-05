@@ -1,10 +1,8 @@
 package com.system.finance_dashboard.controller;
 
-import com.system.finance_dashboard.dto.CategorySum;
-import com.system.finance_dashboard.dto.DashboardDto;
-import com.system.finance_dashboard.dto.FinanceRecordDto;
-import com.system.finance_dashboard.dto.MonthlyTrendDto;
+import com.system.finance_dashboard.dto.*;
 import com.system.finance_dashboard.service.DashboardService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -19,17 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/api/dashboard")
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyRole('ANALYST', 'ADMIN')")
+@PreAuthorize("hasAnyRole('ANALYST', 'ADMIN', 'VIEWER')")
 @Validated
 public class DashboardController {
 
     private final DashboardService dashboardService;
 
     @GetMapping("/summary")
-    @PreAuthorize("hasAnyRole('VIEWER', 'ANALYST', 'ADMIN')")
     public ResponseEntity<DashboardDto> getSummary(){
          return ResponseEntity.status(HttpStatus.OK).body(dashboardService.getSummary());
     }
@@ -52,7 +50,7 @@ public class DashboardController {
     }
 
     @GetMapping("/recent")
-    public ResponseEntity<List<FinanceRecordDto>> getRecentActivity(){
+    public ResponseEntity<List<RecentActivityDto>> getRecentActivity(){
         return ResponseEntity.status(HttpStatus.OK).body(dashboardService.getRecentActivity());
     }
 }

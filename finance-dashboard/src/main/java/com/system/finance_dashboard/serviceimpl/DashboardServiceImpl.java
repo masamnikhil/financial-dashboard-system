@@ -1,9 +1,6 @@
 package com.system.finance_dashboard.serviceimpl;
 
-import com.system.finance_dashboard.dto.CategorySum;
-import com.system.finance_dashboard.dto.DashboardDto;
-import com.system.finance_dashboard.dto.FinanceRecordDto;
-import com.system.finance_dashboard.dto.MonthlyTrendDto;
+import com.system.finance_dashboard.dto.*;
 import com.system.finance_dashboard.entity.FinanceRecord;
 import com.system.finance_dashboard.entity.RecordType;
 import com.system.finance_dashboard.repository.FinanceRecordRepository;
@@ -56,16 +53,16 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public List<FinanceRecordDto> getRecentActivity() {
+    public List<RecentActivityDto> getRecentActivity() {
         List<FinanceRecord> records = financeRecordRepository.findTop5ByDeletedAtIsNullOrderByCreatedAtDesc();
 
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
 
         return records.stream()
-                .map(record -> FinanceRecordDto.builder().id(record.getId())
-                .amount(record.getAmount()).type(record.getType()).createdAt(record.getCreatedAt().format(formatter))
-                .createdBy(record.getCreatedBy()).notes(record.getNotes())
+                .map(record -> RecentActivityDto.builder()
+                .amount(record.getAmount()).type(record.getType()).date(record.getCreatedAt().format(formatter))
+                .notes(record.getNotes())
                 .category(record.getCategory()).build())
                 .toList();
     }
