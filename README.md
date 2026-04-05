@@ -539,13 +539,15 @@ Header : Authorization: Bearer <JWT Token>
 
 ## ⚠️ Common Error Responses
 
-| Status Code | Symbol | Message                 | Description                        |
-| ----------- | ------ | ----------------------- | ---------------------------------- |
-| 400         | ❌     | `Bad Request`          | Validation failed or invalid input |
-| 401         | 🔒     | `Unauthorized`          | No token or invalid token          |
-| 403         | 🚫     | `Forbidden`             | User does not have permission      |
-| 404         | ❌      | `Not Found`            | Resource not found                 |
-| 500         | 💥     | `Internal Server Error` | Something went wrong on the server |
+| Status Code | Symbol | Message               | Description                                |
+| ----------- | ------ | --------------------- | ------------------------------------------ |
+| 400         | ❌      | Bad Request           | Validation failed or invalid input         |
+| 401         | 🔒     | Unauthorized          | No token or invalid token                  |
+| 403         | 🚫     | Forbidden             | User does not have required role           |
+| 404         | ❓      | Not Found             | Resource not found                         |
+| 409         | ⚠️     | Conflict              | Duplicate resource (e.g., username exists) |
+| 500         | 💥     | Internal Server Error | Unexpected server error                    |
+
 
 ## 📌 Assumptions
 - 👤 Users must register before accessing protected APIs
