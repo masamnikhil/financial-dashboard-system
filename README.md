@@ -42,8 +42,9 @@ src/main/java/com/system/finance_dashboard
 
 # Setup Instructions
 ## 1. Clone the repository
-git clone  https://github.com/masamnikhil/financial-dashboard-system.git
+``` text git clone  https://github.com/masamnikhil/financial-dashboard-system.git
 cd finance-dashboard
+```
 
 ## 2. Configure database
 Example application.properties
