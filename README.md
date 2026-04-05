@@ -186,7 +186,7 @@ Body:
 Role successfully updated to ADMIN | VIEWER | ADMIN
 ```
 
-### change Password (Admin Only)
+### change Password 
 ```
 PATCH /api/users/change-password
 Header : Authorization: Bearer <JWT Token>
@@ -562,6 +562,31 @@ Header : Authorization: Bearer <JWT Token>
 - 👑 Admin user is pre-seeded for testing purpose
 - 🔐 Authorization is enforced using Spring Security `@PreAuthorize`
 - 👑 Admin operations are protected with `@PreAuthorize("hasRole('ADMIN')")`
+
+## 📘 API Documentation (Swagger)
+This project uses Swagger / OpenAPI for interactive API documentation and testing.
+```
+📍 Swagger UI: http://localhost:8080/swagger-ui/index.html
+```
+This project uses Swagger / OpenAPI for interactive API documentation and testing.
+
+### Features
+- 🧪 Test APIs directly from the browser
+- 🔐 Support for JWT Bearer authentication
+- 📋 View request and response schemas
+- 📌 Clear grouping of endpoints (User, Records, Dashboard)
+- ⚡ Real-time API interaction
+### How to Authorize in Swagger
+  1. Run the application
+  2. Open Swagger UI
+  3. Click Authorize button
+  4. Enter token in format:
+  Bearer <your-jwt-token>
+  Click Authorize and test secured APIs
+### Note
+### 🔓 Login and Register endpoints do not require authentication
+### 🔒 All other endpoints require JWT token
+### 👑 Admin endpoints require ADMIN role
 
 ## ✅ Conclusion
 This project demonstrates a secure and scalable RESTful backend for managing financial records. It includes JWT-based authentication, role-based authorization, filtering, dashboard summaries, and global exception handling. The application follows clean architecture principles and is designed to be easily extendable for future enhancements.
